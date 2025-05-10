@@ -30,4 +30,6 @@ const sheduleSchema= new mongoose.Schema({
 
 
 
-})
+},
+{timestamps:true}
+)

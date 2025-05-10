@@ -2,7 +2,9 @@ import { student } from "../model/student.model.js";
 import { ApiResponse } from "../utils/apiRes.js";
 import { uploadOnCloudinary } from "../utils/cloudnary.js";
 
-
+// ==========================================================
+//for admin
+// ==========================================================
 
 // add student
 export const studentregister=async (req,res)=>{
@@ -36,6 +38,70 @@ export const studentregister=async (req,res)=>{
 
   res.send(createuser)
 }
+
+
+
+
+
+//update students details
+export const studentupdate = async(req,res)=>{
+     const {class_id,fullname,student_email,password,phone}=req.body
+    if(
+
+        [class_id,fullname,student_email,phone].some((field) => field?.trim() === "")
+    ){
+        throw new Error("all feild require")
+
+    }
+
+
+     const checkAvater= req.file?.path;
+     
+    const avaterurl= await uploadOnCloudinary(checkAvater)
+
+    const user = await student.findById(req.user?._id);
+      if(
+    password
+   ){
+     user.password=password
+   }
+
+   user.class_id=class_id
+   user.fullname=fullname
+   user.student_email=student_email
+   
+   user.phone=phone
+   if(
+    avaterurl
+   ){
+      user.avatar=avaterurl.url
+   }
+
+ await user.save({validateBeforeSave: false});
+ res.send("update");
+   
+}
+//delete studetns id
+export const studentdelete= async (req,res)=>{
+    const id= req.params.id;
+    await student.findByIdAndDelete({_id:id})
+    res.send("ok")
+
+}
+
+//for admin
+
+export const allstudents= async(req,res)=>{
+const data=await student.find({school_id:"681c969156a80dc0276be7f6"});
+res.status(200)
+.json(
+    new ApiResponse(200,{data}," all students profile")
+)
+}
+// ==========================================================
+//for students
+// ==========================================================
+
 
 //login student
 export const studentlogin= async(req,res)=>{
@@ -97,48 +163,16 @@ export const studentlogout = async (req,res)=>{
 }
 
 
-//update students details
-export const studentupdate = async(req,res)=>{
-     const {class_id,fullname,student_email,password,phone}=req.body
-    if(
-
-        [class_id,fullname,student_email,phone].some((field) => field?.trim() === "")
-    ){
-        throw new Error("all feild require")
-
+//get data
+export const studentprofile= async (req,res)=>{
+const data=req.user
+    const options = {
+        httpOnly: true,
+        secure: true
     }
 
-
-     const checkAvater= req.file?.path;
-     
-    const avaterurl= await uploadOnCloudinary(checkAvater)
-
-    const user = await student.findById(req.user?._id);
-      if(
-    password
-   ){
-     user.password=password
-   }
-
-   user.class_id=class_id
-   user.fullname=fullname
-   user.student_email=student_email
-   
-   user.phone=phone
-   if(
-    avaterurl
-   ){
-      user.avatar=avaterurl.url
-   }
-
- await user.save({validateBeforeSave: false});
- res.send("update");
-   
+    return res
+    .status(200)
+    .json(new ApiResponse(200, {data}, "students profile succfull"))
 }
-//delete studetns id
-export const studentdelete= async (req,res)=>{
-    const id= req.params.id;
-    await student.findByIdAndDelete({_id:id})
-    res.send("ok")
 
-}

@@ -24,5 +24,6 @@ const examSchema=new Schema({
         type:String,
         require:true
     }
-})
+},
+{timestamps:true})
 export const exam = mongoose.model("exam",examSchema);

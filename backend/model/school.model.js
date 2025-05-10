@@ -9,7 +9,8 @@ const schoolschema= new Schema({
         require: true
     },
   
-    })
+    },
+{timestamps:true})
 
 
 export const school = mongoose.model("school",schoolschema);

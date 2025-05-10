@@ -12,7 +12,8 @@ const subjectschema= new Schema({
         type:Schema.Types.ObjectId,
         ref:"school"
     }
-    })
+    },
+{timestamps:true})
 
 
 export const subject = mongoose.model("subject",subjectschema);

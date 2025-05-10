@@ -12,6 +12,7 @@ const classschema=new Schema({
         type:String,
         require: true
     }
-})
+},
+{timestamps:true})
 
 export const school_class =mongoose.model("school_class",classschema)

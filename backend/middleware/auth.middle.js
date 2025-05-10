@@ -42,7 +42,9 @@ export const students_verifyJWT =async(req, _, next) => {
     
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
     
-        const user = await student.findById(decodedToken?._id)
+        const user = await student.findById(decodedToken?._id).select(
+            "-password"
+        )
     
         if (!user) {
             
@@ -69,7 +71,9 @@ export const teacher_verifyJWT = async(req, _, next) => {
     
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
     
-        const user = await teacher.findById(decodedToken?._id)
+        const user = await teacher.findById(decodedToken?._id).select(
+            "-password"
+        )
         if (!user) {
             
             throw new Error("Invalid access token")

@@ -23,7 +23,8 @@ const adminSchema=new Schema({
     },
 
     
-})
+},
+{timestamps:true})
 
 
 

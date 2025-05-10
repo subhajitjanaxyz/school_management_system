@@ -19,6 +19,7 @@ const assingattendenceSchema=new Schema({
 
     }
 
-})
+},
+{timestamps:true})
 
 export const at_attendence=mongoose.model("at_attendence",assingattendenceSchema);

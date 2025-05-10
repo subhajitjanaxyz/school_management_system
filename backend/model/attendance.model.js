@@ -28,5 +28,6 @@ const attendancescheam = new Schema({
     type: Boolean,
     default: false,
   },
-});
+},
+{timestamps:true});
 export const attendacne = mongoose.model("attendacne", attendancescheam);

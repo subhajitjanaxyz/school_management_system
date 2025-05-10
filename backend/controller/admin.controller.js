@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { admin } from "../model/admin.model.js";
 import { ApiResponse } from "../utils/apiRes.js";
 export const adminregister=async (req,res)=>{

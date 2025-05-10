@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser"
 import { adminroute } from "./routes/admin.route.js"
 import { studentroute } from "./routes/student.route.js"
 import { teacherroute } from "./routes/teacher.route.js"
+import { classroute } from "./routes/class.route.js"
 
 export const app = express()
 
@@ -22,3 +23,4 @@ app.use(cookieParser())
 app.use("/api",adminroute)
 app.use("/api",studentroute)
 app.use("/api",teacherroute)
+app.use("/api",classroute)

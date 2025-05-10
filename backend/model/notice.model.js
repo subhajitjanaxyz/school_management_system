@@ -27,6 +27,7 @@ const noticeschema= new Schema({
         
     }
     
-})      
+},
+{timestamps:true})      
 
 export const notice = mongoose.model("notice",noticeschema);
