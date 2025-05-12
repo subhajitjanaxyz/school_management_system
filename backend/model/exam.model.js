@@ -12,14 +12,11 @@ const examSchema=new Schema({
         type:Schema.Types.ObjectId,
         ref:"subject"
     },
-    date:{
+    date_time:{
         type:Date,
         require:true
     },
-    time:{
-        type:String,
-        require:true
-    },
+   
     duration:{
         type:String,
         require:true

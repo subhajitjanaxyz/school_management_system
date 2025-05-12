@@ -14,7 +14,7 @@ const noticeschema= new Schema({
     },
     date:{
         type:Date,
-        default:Date.now()
+        // default:Date.now()
     },
     class_id:{
         type:Schema.Types.ObjectId,

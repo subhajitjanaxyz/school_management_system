@@ -6,6 +6,8 @@ import { studentroute } from "./routes/student.route.js"
 import { teacherroute } from "./routes/teacher.route.js"
 import { classroute } from "./routes/class.route.js"
 import { subjectroute } from "./routes/subject.route.js"
+import { noitceroute } from "./routes/notice.route.js"
+import { examrouter } from "./routes/exam.routes.js"
 
 export const app = express()
 
@@ -26,3 +28,5 @@ app.use("/api",studentroute)
 app.use("/api",teacherroute)
 app.use("/api",classroute)
 app.use("/api",subjectroute)
+app.use("/api",noitceroute)
+app.use("/api",examrouter)
