@@ -56,6 +56,6 @@ export const allclass= async(req,res)=>{
 const data=await school_class.find({school_id:"681c969156a80dc0276be7f6"});
 res.status(200)
 .json(
-    new ApiResponse(200,{data}," succesfull")
+    new ApiResponse(200,data," succesfull")
 )
 }

@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { notice } from "../model/notice.model.js";
 import { ApiResponse } from "../utils/apiRes.js";
 
@@ -67,6 +68,10 @@ export const deletnotice = async (req, res) => {
   res.status(200).json(new ApiResponse(200, {}, "notice delete succfully"));
 };
 
+
+
+
+
 //all noitce
 export const allNotice = async (req, res) => {
   const allnotice = await notice.find();
@@ -75,7 +80,37 @@ export const allNotice = async (req, res) => {
 
 //teacher noitce
 export const teachernotice = async (req, res) => {
-  const teachernotice = await notice.find({ audience: "teacher" });
+  const teachernotice = await notice.aggregate([
+  { $match: {
+          audience:"teacher",
+        }
+  },
+  {
+     $lookup:{
+      from:"school_class",
+      localField:"class_id",
+      foreignField:"_id",
+      as:"class_id"
+     }
+
+  },
+  {
+ $unwind: {
+          path: "$class_id",
+          preserveNullAndEmptyArrays: true,
+        },
+
+
+  },
+  {
+    $project:{
+        createdAt:0,
+        updatedAt:0
+    }
+
+
+  }
+])
 
   res
     .status(200)
@@ -90,11 +125,41 @@ export const studentsbyclass = async (req, res) => {
     throw new Error("fields is empty");
   }
 
-  const noticedata = await notice.find({
-    $and: [{ class_id }, { audience: "students" }],
-  });
+  // const noticedata = await notice.find({
+  //   $and: [{ class_id }, { audience: "students" }],
+  // });
+
+const noticedata= await notice.aggregate([
+  { $match: {
+          class_id: new mongoose.Types.ObjectId(class_id),
+        }
+  },
+  {
+     $lookup:{
+      from:"school_class",
+      localField:"class_id",
+      foreignField:"_id",
+      as:"class_id"
+     }
+
+  },
+  {
+ $unwind: {
+          path: "$class_id",
+          preserveNullAndEmptyArrays: true,
+        },
 
 
+  },
+  {
+    $project:{
+        createdAt:0,
+        updatedAt:0
+    }
+
+
+  }
+])
 
 
   res

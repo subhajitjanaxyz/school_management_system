@@ -1,12 +1,16 @@
 import mongoose ,{Schema} from "mongoose";
 const assingattendenceSchema=new Schema({
     school_id:{
-        
+    type:Schema.Types.ObjectId,
+    ref:"school"
     },
     teacher_id:{
-
+        type:Schema.Types.ObjectId,
+        ref:"teacher"
     },
-    class_id:{
+    class_id:{  
+        type:Schema.Types.ObjectId,
+        ref:"school_class"
 
     },
     date: {

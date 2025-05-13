@@ -23,7 +23,7 @@ const noticeschema= new Schema({
     audience:{
         type:String,
         require:true,
-        enum:["students","teacher"]
+        enum:["students","teacher","everyone"]
         
     }
     
