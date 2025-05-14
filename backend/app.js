@@ -9,6 +9,7 @@ import { subjectroute } from "./routes/subject.route.js"
 import { noitceroute } from "./routes/notice.route.js"
 import { examrouter } from "./routes/exam.routes.js"
 import { assingtoattendenceroute } from "./routes/assing_to_attendence.route.js"
+import { attendacneRoute } from "./routes/attendance.route.js"
 
 export const app = express()
 
@@ -32,3 +33,4 @@ app.use("/api",subjectroute)
 app.use("/api",noitceroute)
 app.use("/api",examrouter)
 app.use("/api",assingtoattendenceroute)
+app.use("/api",attendacneRoute)

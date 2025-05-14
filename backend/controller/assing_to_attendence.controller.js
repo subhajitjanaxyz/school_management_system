@@ -2,9 +2,7 @@
 import mongoose from "mongoose";
 import { at_attendence } from "../model/assing_to_attendence.model.js";
 import { ApiResponse } from "../utils/apiRes.js";
-// import response
-// import { ApiResponse } from "../utils/apiResponse.js";
-//assign to attendence
+//assign to attendence  
 export const assign_to_attendence = async (req, res) => {
   const { school_id, teacher_id, class_id, date } = req.body;
   if (
@@ -82,6 +80,8 @@ export const delete_assign_to_attendence = async (req, res) => {
 //         )
 // }
 
+
+// for teacher to create attendance documents
 export const onlyteacher = async (req, res) => {
   //teacher_id its come from token
 
@@ -124,7 +124,7 @@ export const onlyteacher = async (req, res) => {
   res.status(200).json(new ApiResponse(200, data, "data fetch successfully"));
 };
 
-
+// show data on admin account
 export const get_all_assign_to_attendence_admin =    async (req, res) => {
     const { class_id, date } = req.body;
     if ([class_id, date].some((elements) => elements?.trim("") === "")) {
@@ -173,3 +173,16 @@ export const get_all_assign_to_attendence_admin =    async (req, res) => {
         .status(200)
         .json(new ApiResponse(200, data, "get all assign to attendence"));
 }
+
+
+// teacher change status by submit attendance
+ export const ats_on_submit= async (req,res)=>{
+  const id = req.params.id;
+  await at_attendence.findByIdAndUpdate(id,{
+    status:true
+  });
+  res.status(200)
+  .json(
+    new ApiResponse(200,{},"attendance submited successfully")
+  )
+ }
