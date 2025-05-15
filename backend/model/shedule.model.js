@@ -15,15 +15,15 @@ const sheduleSchema= new mongoose.Schema({
         require: true
     },
     class_id:{
-        type:Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"school_class"
     },
     teacher_id:{
-          type:Schema.Types.ObjectId,
+          type:mongoose.Schema.Types.ObjectId,
         ref:"teacher"
     },
     subject_id:{
-          type:Schema.Types.ObjectId,
+          type:mongoose.Schema.Types.ObjectId,
         ref:"subject"
     }
 
@@ -33,3 +33,5 @@ const sheduleSchema= new mongoose.Schema({
 },
 {timestamps:true}
 )
+
+export const shedule = mongoose.model("shedule", sheduleSchema);
